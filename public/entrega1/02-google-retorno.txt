@@ -1,0 +1,1 @@
+https://oauth-pages-lab-6cw.pages.dev/oauth/callback/google
