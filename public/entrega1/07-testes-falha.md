@@ -28,3 +28,18 @@ O callback deve rejeitar a tentativa antes da troca do código por tokens e não
 
 **Resultado observado:**  
 A aplicação respondeu `Transação OAuth ausente.`
+
+
+## Teste 3 — Reutilização da transação OAuth
+
+**Preparação:**  
+Realizado um login válido com Google e identificada a URL do callback `/oauth/callback/google` no DevTools.
+
+**Pedido enviado:**  
+A mesma URL de callback utilizada no login bem-sucedido foi aberta novamente após a conclusão da primeira autenticação.
+
+**Resultado esperado:**  
+O callback deve rejeitar a reutilização da transação OAuth, pois a transação deve ser consumida e removida após o primeiro processamento.
+
+**Resultado observado:**  
+A aplicação respondeu `Transação OAuth ausente.`
