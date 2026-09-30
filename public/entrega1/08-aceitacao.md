@@ -44,6 +44,6 @@ Declaro que os itens acima foram verificados na implementação entregue.
 **Integrante:** Julio Cesar dos Santos Ventura  
 **RA:** 2026108358
 
-**Assinatura:** ______________________________________
+**Assinatura:** Julio Santos
 
-**Data:** ____/____/________
+**Data:** 30/09/2026
