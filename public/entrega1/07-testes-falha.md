@@ -82,7 +82,6 @@ Com uma sessão válida, o valor do cookie `__Host-session` foi copiado localmen
 
 **Pedido enviado:**  
 Após o logout, o valor anterior do cookie `__Host-session` foi restaurado no navegador e a rota `/api/me` foi consultada.
-
 **Resultado esperado:**  
 A aplicação deve rejeitar o cookie de uma sessão que já foi revogada e responder com status HTTP `401`.
 
