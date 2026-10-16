@@ -6,33 +6,33 @@
 
 O workflow `ci.yml` automatiza as verificações do projeto nos eventos configurados. As execuções do CI foram verificadas no GitHub Actions.
 
-- Execução com sucesso: **[INSERIR LINK DA EXECUÇÃO VERDE]**
-- Execução com erro proposital e explicação: **[INSERIR LINK DA EXECUÇÃO VERMELHA]**
+- Execução com sucesso: https://github.com/juliostoy/oauth-pages-lab/actions/runs/38657008815)
+- Execução com erro proposital e explicação: https://github.com/juliostoy/oauth-pages-lab/actions/runs/38656767786
 
 ## Tarefa 2 — Proteção da branch main
 
-A branch `main` foi protegida para exigir um Pull Request e a aprovação do status check do CI antes do merge. Foi verificado o bloqueio de alterações diretas e o fluxo de liberação por Pull Request.
+A branch `main` foi protegida para exigir um Pull Request e a aprovação do status check `verificar` antes do merge. O Pull Request abaixo foi utilizado para testar o fluxo de alterações na branch protegida.
 
-- Pull Request de teste: **[INSERIR LINK DO PR DE TESTE]**
-- Evidência da tentativa de push direto recusada: **[INSERIR LINK OU REGISTRO DA EVIDÊNCIA]**
+- Pull Request de teste: https://github.com/juliostoy/oauth-pages-lab/pull/1
+- Evidência da proteção da branch: configuração da regra de proteção da branch `main` e testes realizados no GitHub.
 
 ## Tarefa 3 — Revisão de Pull Request por IA
 
 Foi criado o workflow `revisao-ia.yml` para analisar as alterações dos Pull Requests e publicar comentários com sugestões de revisão. O workflow foi executado com sucesso.
 
 - Pull Request com revisão por IA: https://github.com/juliostoy/oauth-pages-lab/pull/3
-- Teste de falha de permissão: **[INSERIR LINK DA EXECUÇÃO COM ERRO DE PERMISSÃO]**
+- Teste de falha de permissão: **(https://github.com/juliostoy/oauth-pages-lab/actions/runs/38929565647)**
 
 **Análise crítica da IA:**  
-[REGISTRAR UMA AFIRMAÇÃO INCORRETA OU IRRELEVANTE FEITA PELA IA E EXPLICAR POR QUE ELA ESTÁ INCORRETA OU NÃO SE APLICA AO CÓDIGO.]
+Durante a revisão, a IA apontou um possível risco relacionado à exposição do token COPILOT_PAT, disponibilizado como variável de ambiente no passo de revisão. Esse alerta é relevante como precaução de segurança, mas não comprova que ocorreu um vazamento. Após a análise, foram restringidas as ferramentas disponíveis para a IA, reduzindo a possibilidade de ações indevidas. Isso demonstra que as sugestões da IA precisam ser avaliadas criticamente e que a revisão automatizada não substitui as boas práticas de segurança.
 
 ## Tarefa 4 — Migrações do Cloudflare D1
 
 Foi criado o workflow `migrar-d1` para aplicar as migrações do banco D1 remotamente quando alterações relevantes são enviadas à branch `main`. Após a correção do processo de instalação do Wrangler, a execução do workflow ficou verde.
 
 - Pull Request de criação do workflow: https://github.com/juliostoy/oauth-pages-lab/pull/4
-- Pull Request de correção do workflow: **[INSERIR LINK DO PR DE CORREÇÃO]**
-- Execução bem-sucedida da migração: **[INSERIR LINK DA EXECUÇÃO VERDE DE migrar-d1]**
+- Pull Request de correção do workflow: https://github.com/juliostoy/oauth-pages-lab/pull/5
+- Execução bem-sucedida da migração: https://github.com/juliostoy/oauth-pages-lab/actions/runs/38953630889
 
 ## Perguntas
 
@@ -46,4 +46,14 @@ Por segurança, workflows disparados por Pull Requests de forks não recebem os 
 
 ### 3. Por que o workflow da Tarefa 3 declara `permissions` em vez de usar as permissões padrão do `GITHUB_TOKEN`?
 
-A declaração explícita de `permissions` aplica o princípio do menor privilégio, concedendo somente as permissões necessárias para
+A declaração explícita de `permissions` aplica o princípio do menor privilégio, concedendo somente as permissões necessárias para cada tarefa. Isso torna as permissões mais previsíveis e reduz os riscos de conceder acesso excessivo ao token.
+
+### 4. A revisão da IA pode substituir o status check da Tarefa 2? Justifique.
+
+Não. A revisão da IA serve como auxílio para identificar possíveis problemas no código, mas pode cometer erros ou deixar de encontrar falhas. O status check do CI executa verificações automatizadas exigidas pela proteção da branch. Por isso, a revisão da IA não deve substituir o status check obrigatório.
+
+## Referências
+
+- GitHub Actions — Workflow syntax: https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions
+- GitHub Copilot CLI em GitHub Actions: https://docs.github.com/en/copilot/how-tos/copilot-cli/automate-copilot-cli/automate-with-actions
+- Cloudflare D1 — Migrations: https://developers.cloudflare.com/d1/reference/migrations
