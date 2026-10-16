@@ -49,6 +49,7 @@ jobs:
         uses: actions/ai-inference@v3
         env:
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_PAT }}
+          COPILOT_MODEL: gpt-5.5
         with:
           prompt-file: prompt.txt
           system-prompt: Você é um revisor de código objetivo. Analise apenas o diff fornecido e não invente problemas.
