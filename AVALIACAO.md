@@ -6,7 +6,7 @@
 
 O workflow `ci.yml` automatiza as verificações do projeto nos eventos configurados. As execuções do CI foram verificadas no GitHub Actions.
 
-- Execução com sucesso: https://github.com/juliostoy/oauth-pages-lab/actions/runs/38657008815)
+- Execução com sucesso: https://github.com/juliostoy/oauth-pages-lab/actions/runs/38657008815
 - Execução com erro proposital e explicação: https://github.com/juliostoy/oauth-pages-lab/actions/runs/38656767786
 
 ## Tarefa 2 — Proteção da branch main
@@ -21,7 +21,7 @@ A branch `main` foi protegida para exigir um Pull Request e a aprovação do sta
 Foi criado o workflow `revisao-ia.yml` para analisar as alterações dos Pull Requests e publicar comentários com sugestões de revisão. O workflow foi executado com sucesso.
 
 - Pull Request com revisão por IA: https://github.com/juliostoy/oauth-pages-lab/pull/3
-- Teste de falha de permissão: **(https://github.com/juliostoy/oauth-pages-lab/actions/runs/38929565647)**
+- Teste de falha de permissão: https://github.com/juliostoy/oauth-pages-lab/actions/runs/38929565647
 
 **Análise crítica da IA:**  
 Durante a revisão, a IA apontou um possível risco relacionado à exposição do token COPILOT_PAT, disponibilizado como variável de ambiente no passo de revisão. Esse alerta é relevante como precaução de segurança, mas não comprova que ocorreu um vazamento. Após a análise, foram restringidas as ferramentas disponíveis para a IA, reduzindo a possibilidade de ações indevidas. Isso demonstra que as sugestões da IA precisam ser avaliadas criticamente e que a revisão automatizada não substitui as boas práticas de segurança.
