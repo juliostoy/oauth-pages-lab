@@ -25,8 +25,8 @@ jobs:
         with:
           node-version: 22
 
-      - name: Instala dependências
-        run: npm ci
+      - name: Instala Wrangler
+        run: npm install --no-save wrangler
 
       - name: Aplica migrações no Cloudflare D1
         env:
