@@ -31,32 +31,26 @@ jobs:
         env:
           BASE_REF: ${{ github.base_ref }}
         run: |
+          git diff "origin/${BASE_REF}...HEAD" > diff.txt
           {
             echo "Revise o diff de um site com Cloudflare Pages Functions e D1."
-            echo "Aponte, em português e em até 10 itens:"
-            echo "- Segredos expostos."
-            echo "- SQL montado por concatenação em vez de prepare().bind()."
-            echo "- Erros de lógica."
+            echo "Responda em português, com no máximo 10 itens."
+            echo "Procure segredos expostos, SQL sem prepare().bind() e erros de lógica."
+            echo "Se não encontrar problemas, diga isso claramente."
             echo ""
-            echo '```diff'
-            git diff "origin/${BASE_REF}...HEAD" | head -c 20000
-            echo ""
-            echo '```'
+            cat diff.txt | head -c 20000
           } > prompt.txt
 
       - name: Revisa o código com IA
-        id: ia
-        uses: actions/ai-inference@v3
         env:
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_PAT }}
-          COPILOT_MODEL: auto
-        with:
-          prompt-file: prompt.txt
-          system-prompt: Você é um revisor de código objetivo. Analise apenas o diff fornecido e não invente problemas.
+        run: |
+          copilot -p "$(cat prompt.txt)" -s --no-ask-user > resposta.txt
+          test -s resposta.txt
 
       - name: Comenta no pull request
         env:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
-          gh pr comment "$PR_NUMBER" --body-file "${{ steps.ia.outputs.response-file }}"
+          gh pr comment "$PR_NUMBER" --body-file resposta.txt
