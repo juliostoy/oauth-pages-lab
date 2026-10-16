@@ -45,8 +45,7 @@ jobs:
         env:
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_PAT }}
         run: |
-          copilot -p "$(cat prompt.txt)" -s --no-ask-user > resposta.txt
-          test -s resposta.txt
+          copilot -p "$(cat prompt.txt)" -s --no-ask-user --excluded-tools='shell,write,url,github-mcp-server' > resposta.txt
 
       - name: Comenta no pull request
         env:
